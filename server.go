@@ -3,6 +3,8 @@ package main
 import (
 	"net/http"
 	"os/exec"
+
+	"go-rsc/app/api/users"
 )
 
 func renderReactComponent(componentPath string) (string, error) {
@@ -39,6 +41,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	http.HandleFunc("/api/users", users.HandleUsers)
 	http.HandleFunc("/", handler)
 	http.ListenAndServe(":8080", nil)
 }
